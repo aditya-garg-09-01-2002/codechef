@@ -1,0 +1,52 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int main() {
+    int t;
+    cin>>t;
+    while(t--)
+    {
+        int n , m,j=0,check=1;
+        cin>>n>>m;
+        vector<pair<int,int>>v;
+        map<int,int>m2;
+        for(int i=0;i<m;i++)
+        {
+            int a,b;
+            cin>>a>>b;
+            m2[a]=b;
+            v.push_back({b,a});
+        }
+        sort(v.begin(),v.end());
+        vector<int>ans,ans2,left;
+        for(int i=0;i<m;i++)
+        {
+            ans.push_back(v[i].second);
+        }
+        for(int i=1;i<=n;i++)
+        if(m2[i]==0)
+        left.push_back(i);
+        for(int i=0;i<ans.size();i++)
+        {
+            int temp=m2[ans[i]];
+            while(temp-1>ans2.size()&&j<left.size()&&left[j]<ans[i])
+            {
+                ans2.push_back(left[j]);
+                j++;
+            }
+            ans2.push_back(ans[i]);
+        }
+        for(;j<left.size();j++)ans2.push_back(left[j]);
+        for(int i=0;i<n;i++)
+        {
+            int temp=m2[ans2[i]];
+            if(temp!=0)
+            if(i>=temp)
+            check=0;
+        }
+        if(check)for(int i=0;i<n;i++)cout<<ans2[i]<<" ";
+        else cout<<-1;
+        cout<<endl;
+    }
+}
