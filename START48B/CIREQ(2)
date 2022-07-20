@@ -1,0 +1,45 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int main() {
+    int t;
+    cin>>t;
+    while(t--)
+    {
+        int n;
+        cin>>n;
+        vector<vector<int>>v(n);
+        vector<int>vt;
+        map<int,int>mi;
+        map<pair<int,int>,int>m;
+        for(int i=0;i<n;i++)
+        {
+            int a;
+            cin>>a;
+            vt.push_back(a);
+        }
+        sort(vt.begin(),vt.end());
+        for(int i=0;i<n;i++)
+        {
+            int a=vt[i];
+            int temp=mi[vt[i]];
+            v[temp].push_back(vt[i]);
+            if(v[temp].size()>=vt[i])
+            mi[vt[i]]++;
+        }
+        int ans=0;
+        /*for(int i=0;i<n;i++)
+        {
+            for(int j=0;j<v[i].size();j++)
+            cout<<v[i][j]<<" ";
+            cout<<endl;
+        }*/
+        for(int i=0;i<n;i++)
+        {
+            if(v[i].size()>0)
+            ans++;
+        }
+        cout<<ans<<endl;
+    }
+}
